@@ -4,7 +4,7 @@ import SceneDrink from './SceneDrink.js'
 const config = {
     width:1024,
     height:600,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#ffffff',
     // set game to the center of the browser, can be also done in <div> css style in html file
     scale: {
         mode: Phaser.Scale.FIT,
