@@ -10,10 +10,13 @@ export default class SceneWelcome extends Phaser.Scene {
     }
 
     create() {
+        // sprite can be animated but slower than image
         this.add.sprite(this.cameras.main.centerX, this.cameras.main.centerY - 100, 'welcome');
+        // setInteractive() allows listening to mouse event
         var startButton = this.add.sprite(this.cameras.main.centerX, this.cameras.main.centerY, 'start').setInteractive();  
 
         startButton.once('pointerup', function (pointer) {
+            // start the next scene
             this.scene.start('SceneDrink');
         }, this);
     }
