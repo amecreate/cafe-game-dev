@@ -4,17 +4,21 @@ export default class SceneWelcome extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('welcome', 'assets/welcome.png');
-        this.load.image('start', 'assets/make-a-drink.png');
-        this.load.bitmapFont('pressstart', 'assets/pressstart.png', 'assets/presstart.fnt')
+        this.load.image('store1', 'assets/Store1.png');
+        this.load.bitmapFont('pressstart', 'assets/pressstart.png', 'assets/presstart.fnt');
+        this.load.audio("ding", ["assets/Chime.mp3"]);
+        this.load.audio("water", ["assets/Water.mp3"]);
     }
 
     create() {
+        // music
+        const soundList = ["ding","water"];
+        this.sound.decodeAudio(soundList);
+
         // sprite can be animated but slower than image
-        this.add.sprite(this.cameras.main.centerX, this.cameras.main.centerY - 100, 'welcome');
         // setInteractive() allows listening to mouse event
-        var startButton = this.add.sprite(this.cameras.main.centerX, this.cameras.main.centerY, 'start').setInteractive();
-        var clickhere = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY+50, 'click to order', { fontSize: '25px', fontFamily: 'Helvetica', color: '#000000'}).setOrigin(0.5);clickhere.alpha = 0;
+        var startButton = this.add.sprite(this.cameras.main.centerX, this.cameras.main.centerY, 'store1').setInteractive();
+        var clickhere = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY-200, 'Click To Order', { fontSize: '25px', fontFamily: 'Helvetica', color: '#000000'}).setOrigin(0.5);clickhere.alpha = 0;
 
         // toggle text
         startButton.on('pointerover', function (pointer) {
@@ -27,6 +31,11 @@ export default class SceneWelcome extends Phaser.Scene {
 
         // mouse event click to change scene
         startButton.once('pointerup', function (pointer) {
+            
+            // play music
+            const marker = {name: "short", start:1, duration: 2};
+            this.sound.play(Phaser.Math.RND.pick(soundList), marker);
+
             // fade out current scene
             this.cameras.main.fadeOut(1000, 255, 255, 255)
         }, this);
