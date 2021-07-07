@@ -7,10 +7,12 @@ export default class SceneDrink extends Phaser.Scene {
     preload() {
         this.load.image('drink1', 'assets/Drink1.png');
         this.load.image('drink2', 'assets/Drink2.png');
+        this.load.image('drink3', 'assets/Drink3.png');
+        this.load.image('drink4', 'assets/Drink4.png');
     }
 
     create() {
-        const drinkList = ['drink1', 'drink2']
+        const drinkList = ['drink1', 'drink2', 'drink3', 'drink4'];
         // fade in current scene over 1500 ms (1.5 s)
         this.cameras.main.fadeIn(1500, 255, 255, 255)
         // randomly select a drink from drinkList

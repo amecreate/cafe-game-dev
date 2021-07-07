@@ -5,6 +5,7 @@ export default class SceneWelcome extends Phaser.Scene {
 
     preload() {
         this.load.image('store1', 'assets/Store1.png');
+        this.load.image('store2', 'assets/Store2.png');
         this.load.bitmapFont('pressstart', 'assets/pressstart.png', 'assets/presstart.fnt');
         this.load.audio("ding", ["assets/Chime.mp3"]);
         this.load.audio("water", ["assets/Water.mp3"]);
@@ -17,7 +18,8 @@ export default class SceneWelcome extends Phaser.Scene {
 
         // sprite can be animated but slower than image
         // setInteractive() allows listening to mouse event
-        var startButton = this.add.sprite(this.cameras.main.centerX, this.cameras.main.centerY, 'store1').setInteractive();
+        const storeList = ["store1", "store2"];
+        var startButton = this.add.sprite(this.cameras.main.centerX, this.cameras.main.centerY, Phaser.Math.RND.pick(storeList)).setInteractive();
         var clickhere = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY-200, 'Click To Order', { fontSize: '25px', fontFamily: 'Helvetica', color: '#000000'}).setOrigin(0.5);clickhere.alpha = 0;
 
         // toggle text
