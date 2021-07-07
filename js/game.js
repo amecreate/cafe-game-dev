@@ -14,6 +14,12 @@ const config = {
     type: Phaser.AUTO,
     // link to div id in index.html
     parent: 'phaser-game',
+    physics: {
+        default: 'arcade',
+        arcade: {
+            debug: false
+        }
+    },
     scene:[ SceneWelcome, SceneDrink ]
 };
 
