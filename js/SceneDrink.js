@@ -22,7 +22,7 @@ export default class SceneDrink extends Phaser.Scene {
 
         // add drink name
         const orderList = {'drink1': 'Dragon Well','drink2': 'White Peony','drink3': 'Red Oolong','drink4': 'Ginger Orchid'};
-        this.add.text(this.cameras.main.centerX, this.cameras.main.centerY-270, 'Your Order Is: ' + orderList[drinkName], {
+        this.add.text(this.cameras.main.centerX, this.cameras.main.centerY-250, 'Your Order Is: ' + orderList[drinkName], {
             fontSize: '20px', 
             fontFamily: 'Helvetica', 
             color: '#000000'}).setOrigin(0.5);
@@ -34,8 +34,8 @@ export default class SceneDrink extends Phaser.Scene {
             color: '#000000', 
             backgroundColor: '#FEA99F', 
             padding: {left:8,right:8,top:3,bottom:3}};
-        this.cakeButton = this.add.text(this.cameras.main.centerX-43, this.cameras.main.centerY-210, 'Cheese Cake Please!', textConfig).setOrigin(0.5).setInteractive();
-        this.returnButton = this.add.text(this.cameras.main.centerX+110, this.cameras.main.centerY-210, 'Return', textConfig).setOrigin(0.5).setInteractive();
+        this.cakeButton = this.add.text(this.cameras.main.centerX-43, this.cameras.main.centerY-215, 'Cheese Cake Please!', textConfig).setOrigin(0.5).setInteractive();
+        this.returnButton = this.add.text(this.cameras.main.centerX+110, this.cameras.main.centerY-215, 'Return', textConfig).setOrigin(0.5).setInteractive();
 
         
         // toggle text transparency
@@ -58,7 +58,8 @@ export default class SceneDrink extends Phaser.Scene {
         // cake button click event
         this.cakeButton.once('pointerup', function (pointer) {
             // change text
-            this.cakeButton.setText('Enjoy!');
+            this.cakeButton.destroy();
+            this.add.text(this.cameras.main.centerX-43, this.cameras.main.centerY-215, 'Enjoy!', textConfig).setOrigin(0.5);
 
             // move existing sprite
             this.tweens.add({
