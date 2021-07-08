@@ -9,17 +9,22 @@ export default class SceneWelcome extends Phaser.Scene {
         this.load.audio("ding", ["assets/Chime.mp3"]);
         this.load.audio("water", ["assets/Water.mp3"]);
 
-        var progressBar = this.add.graphics();
+        // add loading graphics
         var progressBox = this.add.graphics();
+        var progressBar = this.add.graphics();
         progressBox.fillStyle(0x222222, 0.8);
-        progressBox.fillRect(240,270,320,50);
+        progressBox.fillRect(this.cameras.main.centerX-150, this.cameras.main.centerY,320,50);
         var loadingText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY-100,'Loading...', { fontSize: '25px', fontFamily: 'Helvetica', color: '#000000'}).setOrigin(0.5);
 
+        // loading in progress
         this.load.on('progress', value => {
+            console.log(value);
             progressBar.clear();
-            progressBar.fillStyle(0xffffff, 1);
-            progressBar.fillRect(250, 280, 300 * value, 30)
+            progressBar.fillStyle(0xCCCCCC, 1);
+            progressBar.fillRect(this.cameras.main.centerX+10-150, this.cameras.main.centerY+10, 300 * value, 30)
         });
+
+        // loading complete
         this.load.on('complete', () =>{
             progressBar.destroy();
             progressBox.destroy();
