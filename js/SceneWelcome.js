@@ -6,15 +6,31 @@ export default class SceneWelcome extends Phaser.Scene {
     preload() {
         this.load.image('store1', 'assets/Store1.png');
         this.load.image('store2', 'assets/Store2.png');
-        this.load.bitmapFont('pressstart', 'assets/pressstart.png', 'assets/presstart.fnt');
         this.load.audio("ding", ["assets/Chime.mp3"]);
         this.load.audio("water", ["assets/Water.mp3"]);
+
+        var progressBar = this.add.graphics();
+        var progressBox = this.add.graphics();
+        progressBox.fillStyle(0x222222, 0.8);
+        progressBox.fillRect(240,270,320,50);
+        var loadingText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY-100,'Loading...', { fontSize: '25px', fontFamily: 'Helvetica', color: '#000000'}).setOrigin(0.5);
+
+        this.load.on('progress', value => {
+            progressBar.clear();
+            progressBar.fillStyle(0xffffff, 1);
+            progressBar.fillRect(250, 280, 300 * value, 30)
+        });
+        this.load.on('complete', () =>{
+            progressBar.destroy();
+            progressBox.destroy();
+            loadingText.destroy();
+        });
+
     }
 
     create() {
         // music
         const soundList = ["ding","water"];
-        this.sound.decodeAudio(soundList);
 
         // sprite can be animated but slower than image
         // setInteractive() allows listening to mouse event
