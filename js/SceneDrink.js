@@ -17,7 +17,15 @@ export default class SceneDrink extends Phaser.Scene {
         // fade in current scene over 1500 ms (1.5 s)
         this.cameras.main.fadeIn(1500, 255, 255, 255)
         // randomly select a drink from drinkList
-        this.drink = this.physics.add.image(this.cameras.main.centerX, this.cameras.main.centerY, Phaser.Math.RND.pick(drinkList));
+        var drinkName = Phaser.Math.RND.pick(drinkList);
+        this.drink = this.physics.add.image(this.cameras.main.centerX, this.cameras.main.centerY, drinkName);
+
+        // add drink name
+        const orderList = {'drink1': 'Dragon Well','drink2': 'White Peony','drink3': 'Red Oolong','drink4': 'Ginger Orchid'};
+        this.add.text(this.cameras.main.centerX, this.cameras.main.centerY-270, 'Your Order Is: ' + orderList[drinkName], {
+            fontSize: '20px', 
+            fontFamily: 'Helvetica', 
+            color: '#000000'}).setOrigin(0.5);
 
         // add buttons
         const textConfig = { 
